@@ -1,0 +1,31 @@
+html {
+    background-image: url(https://cdn.shopify.com/s/files/1/0781/4423/files/02_dadd89cb-ad69-43d4-9ceb-169c1469c066.jpg?v=1564107726);
+    color: rgb(255, 255, 255);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode';
+    font-weight: bold;
+    padding: center;
+    font-size: 15px;
+}
+
+
+#title {
+    color: rgb(37, 8, 8)
+}
+
+.btn {
+    background-color: burlywood;
+    color: darkgoldenrod;
+    text-align: center;
+    border: darkorange 4px  solid;
+    border-radius: 14px;
+    padding: 10px;
+    margin: 11px;
+    width: 350px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btn:hover{
+    background-color: cornsilk;
+}
+
