@@ -39,7 +39,7 @@ function Trivia({questions}) {
     }
     
     const IncorrectAnswer = () =>{
-        if (score < 0){
+        if (score === 0){
             setScore(0)
             setHidden(false)
             setHidden2(true)
