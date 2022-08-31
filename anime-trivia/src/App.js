@@ -45,11 +45,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Difficulty: {difficulty}</h1>
+        <h1>Welcome to the Anime trivia game</h1>
+        <h1>select your difiiculty and hit start</h1>
+        <h2>Difficulty: {difficulty}</h2>
         <button onClick={() => setDifficulty("Easy")}>Easy</button>
         <button onClick={() => setDifficulty("Medium")}>Medium</button>
         <button onClick={() => setDifficulty("Hard")}>Hard</button>
-        <button>Start Trivia</button>
+        <button>Start</button>
       </header>
     </div>
   );
