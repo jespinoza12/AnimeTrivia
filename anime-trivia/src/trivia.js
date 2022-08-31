@@ -18,7 +18,11 @@ function Trivia({questions}) {
         }else if (questions.type === "Multiple"){
             setType(false)
         }
-    }, [qNum]);
+
+        bruhquestions();
+
+    }, [qNum])
+
 
     
     const nextQuestion = () =>{
@@ -29,9 +33,11 @@ function Trivia({questions}) {
             setQNum(qNum + 1)
             setHidden(true)
             setHidden2(false)
+            
         }
         
     }
+    
     const IncorrectAnswer = () =>{
         if (score < 0){
             setScore(0)
@@ -45,6 +51,7 @@ function Trivia({questions}) {
             alert("Incorrect -10")
         }
     }
+
     const CorrectAnswer = () =>{
         setScore(score + 10)
         setHidden2(true)
@@ -55,10 +62,11 @@ function Trivia({questions}) {
     const bruhquestions = () =>{
 
         const answers = [
-            [questions[qNum].correct_answer, CorrectAnswer]
-            [questions[qNum].incorrect_answer, IncorrectAnswer]
-            [questions[qNum].incorrect_answer, IncorrectAnswer]
-            [questions[qNum].incorrect_answer, IncorrectAnswer]
+            {an: questions[qNum].correct_answer, cor: "correct"},
+            {an: questions[qNum].incorrect_answers[0], cor: "incorrect"},
+            {an: questions[qNum].incorrect_answers[1], cor: "incorrect"},
+            {an: questions[qNum].incorrect_answers[2], cor: "incorrect"},
+            
         ]
 
         answers.forEach((element, index) => {
@@ -71,6 +79,15 @@ function Trivia({questions}) {
         });
 
         setAns(answers)
+        console.log(answers)
+    }
+
+    const check = (cor)=>{
+        if(cor === "correct"){
+            CorrectAnswer()
+        }else{
+            IncorrectAnswer()
+        }
     }
 
     if(changeScreen && type === false){
@@ -90,10 +107,14 @@ function Trivia({questions}) {
                     <h1>Question number {qNum + 1}</h1>
                     <h2>Score: {score.toString()}</h2>
                     <h1>{questions[qNum].question}</h1>
-                    <button hidden={hidden2} onClick={ans[0][1]}>{ans[0][0]}</button>
-                    <button hidden={hidden2} onClick={ans[1][1]}>{ans[1][0]}</button>
-                    <button hidden={hidden2} onClick={ans[2][1]}>{ans[2][0]}</button>
-                    <button hidden={hidden2} onClick={ans[3][1]}>{ans[3][0]}</button>
+                    {
+                        ans.map((answ, index) => (
+                            <>
+                            <button hidden={hidden2} onClick={()=>{check(answ.cor)}}>{answ.an}</button>
+                            </>
+                        ))
+                    }
+                    
                 </div>
                 <button hidden={hidden} onClick={nextQuestion}>Next Question</button>
             </div>
