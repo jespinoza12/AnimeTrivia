@@ -1,22 +1,21 @@
 import {useEffect, useState} from 'react'
-
+import './App.css'
 function Trivia({questions}) {
     const [hidden, setHidden] = useState(true)
     const [hidden2, setHidden2] = useState(false)
     const [type, setType] = useState(false)
-    const [qNum, setQNum] = useState(-1)
+    const [qNum, setQNum] = useState(0)
     const [changeScreen, setChangeScreen] = useState(false)
     const [score, setScore] = useState(0)
     const [ans, setAns] = useState([])
     useEffect(()=>{
         bruhquestions();
-        setQNum(0)
     }, []);
 
     useEffect(()=>{
-        if (questions.type.toLower() === "boolean"){
+        if (questions.type === "Boolean"){
             setType(true)
-        }else if (questions.type.toLower() === "mltiple"){
+        }else if (questions.type === "Multiple"){
             setType(false)
         }
     }, [qNum]);
@@ -86,12 +85,11 @@ function Trivia({questions}) {
     }else if (type === false && changeScreen === false){
         return( 
             <>
-            <div>
-                <div>
+            <div className='App'>
+                <div className='App-header'>
                     <h1>Question number {qNum + 1}</h1>
                     <h2>Score: {score.toString()}</h2>
                     <h1>{questions[qNum].question}</h1>
-                    
                     <button hidden={hidden2} onClick={ans[0][1]}>{ans[0][0]}</button>
                     <button hidden={hidden2} onClick={ans[1][1]}>{ans[1][0]}</button>
                     <button hidden={hidden2} onClick={ans[2][1]}>{ans[2][0]}</button>
