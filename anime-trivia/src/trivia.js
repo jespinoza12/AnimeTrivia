@@ -90,7 +90,7 @@ function Trivia({questions}) {
         }
     }
 
-    if(changeScreen && type === false){
+    if(changeScreen){
         return(
             <>
             <div>
@@ -99,7 +99,7 @@ function Trivia({questions}) {
             </div>
             </>
         )
-    }else if (type === false && changeScreen === false){
+    }else{
         return( 
             <>
             <div className='App'>
@@ -119,22 +119,6 @@ function Trivia({questions}) {
             </div>
             </>
         )
-    }else if (type === true && changeScreen === false){
-        return( 
-            <>
-            <div>
-                <div>
-                    <h1>Question number {qNum + 1}</h1>
-                    <h2>Score: {score.toString()}</h2>
-                    <h1>{questions[qNum].question}</h1>      
-                    <button hidden={hidden2} onClick={CorrectAnswer}>{questions.correct_answer}</button>
-                    <button hidden={hidden2} onClick={IncorrectAnswer}>{questions.incorrect_answers[0]}</button>
-                    <button hidden={hidden} onClick={nextQuestion}>Next Question</button>
-                </div>
-            </div>
-            </>
-        )
-
     }
 }
 
