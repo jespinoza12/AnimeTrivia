@@ -8,20 +8,24 @@ function Trivia({questions}) {
     const [changeScreen, setChangeScreen] = useState(false)
     const [score, setScore] = useState(0)
     const [ans, setAns] = useState([])
+
     useEffect(()=>{
         bruhquestions();
     }, []);
 
     useEffect(()=>{
-        if (questions.type === "Boolean"){
+        if (questions[qNum].type === "boolean"){
             setType(true)
-        }else if (questions.type === "Multiple"){
-            setType(false)
+        }else if (questions[qNum].type === "multiple"){
+            setType(false)   
         }
-
-        bruhquestions();
+        
 
     }, [qNum])
+
+    useEffect(()=>{
+        bruhquestions();
+    }, [type])
 
 
     
@@ -37,7 +41,7 @@ function Trivia({questions}) {
         }
         
     }
-    
+
     const IncorrectAnswer = () =>{
         if (score < 0){
             setScore(0)
@@ -60,14 +64,26 @@ function Trivia({questions}) {
     }
 
     const bruhquestions = () =>{
+        let answers = [
 
-        const answers = [
-            {an: questions[qNum].correct_answer, cor: "correct"},
-            {an: questions[qNum].incorrect_answers[0], cor: "incorrect"},
-            {an: questions[qNum].incorrect_answers[1], cor: "incorrect"},
-            {an: questions[qNum].incorrect_answers[2], cor: "incorrect"},
-            
         ]
+
+        if(type){
+            answers = [
+                {an: questions[qNum].correct_answer, cor: "correct"},
+                {an: questions[qNum].incorrect_answers[0], cor: "incorrect"},
+            ] 
+            console.log(type)
+        }else if (!type){
+            answers = [
+                {an: questions[qNum].correct_answer, cor: "correct"},
+                {an: questions[qNum].incorrect_answers[0], cor: "incorrect"},
+                {an: questions[qNum].incorrect_answers[1], cor: "incorrect"},
+                {an: questions[qNum].incorrect_answers[2], cor: "incorrect"}, 
+            ]
+            console.log(type)
+        }
+
 
         answers.forEach((element, index) => {
             let rand = Math.floor(Math.random() * 4);
@@ -90,7 +106,7 @@ function Trivia({questions}) {
         }
     }
 
-    if(changeScreen && type === false){
+    if(changeScreen){
         return(
             <>
             <div>
@@ -99,7 +115,7 @@ function Trivia({questions}) {
             </div>
             </>
         )
-    }else if (type === false && changeScreen === false){
+    }else{
         return( 
             <>
             <div className='App'>
@@ -114,28 +130,11 @@ function Trivia({questions}) {
                             </>
                         ))
                     }
-                    
-                </div>
                 <button hidden={hidden} onClick={nextQuestion}>Next Question</button>
+                </div>
             </div>
             </>
         )
-    }else if (type === true && changeScreen === false){
-        return( 
-            <>
-            <div>
-                <div>
-                    <h1>Question number {qNum + 1}</h1>
-                    <h2>Score: {score.toString()}</h2>
-                    <h1>{questions[qNum].question}</h1>      
-                    <button hidden={hidden2} onClick={CorrectAnswer}>{questions.correct_answer}</button>
-                    <button hidden={hidden2} onClick={IncorrectAnswer}>{questions.incorrect_answers[0]}</button>
-                </div>
-                <button hidden={hidden} onClick={nextQuestion}>Next Question</button>
-            </div>
-            </>
-        )
-
     }
 }
 
