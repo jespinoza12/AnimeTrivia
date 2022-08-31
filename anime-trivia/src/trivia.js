@@ -6,6 +6,10 @@ function Trivia({questions}) {
     const [qNum, setQNum] = useState(0)
     const [changeScreen, setChangeScreen] = useState(false)
     const [score, setScore] = useState(0)
+    const [ans, setAns] = useState([])
+    useEffect(()=>{
+        questions();
+    }, []);
 
     
     const nextQuestion = () =>{
@@ -41,11 +45,22 @@ function Trivia({questions}) {
     const questions = () =>{
 
         answers = [
-            [questions[qNum].correct_answer]
-            [questions[qNum].incorrect_answer]
-            [questions[qNum].incorrect_answer]
-            [questions[qNum].incorrect_answer]
+            [questions[qNum].correct_answer, CorrectAnswer]
+            [questions[qNum].incorrect_answer, IncorrectAnswer]
+            [questions[qNum].incorrect_answer, IncorrectAnswer]
+            [questions[qNum].incorrect_answer, IncorrectAnswer]
         ]
+
+        answers.forEach((element, index) => {
+            let rand = Math.floor(Math.random() * 4);
+            let a = answers[index];
+            let b = answers[rand];
+            answers[index] = b;
+            answers[rand] = a;
+        
+        });
+
+        setAns(answers)
     }
 
     if(changeScreen){
@@ -65,10 +80,10 @@ function Trivia({questions}) {
                     <h1>Question number {qNum + 1}</h1>
                     <h2>Score: {score.toString()}</h2>
                     <h1>{questions[qNum].question}</h1>
-                    <button hidden={hidden2} onClick={CorrectAnswer}>{questions[qNum].correct_answer}</button>
-                    <button hidden={hidden2} onClick={IncorrectAnswer}>{questions[qNum].incorrect_answers[0]}</button>
-                    <button hidden={hidden2} onClick={IncorrectAnswer}>{questions[qNum].incorrect_answers[1]}</button>
-                    <button hidden={hidden2} onClick={IncorrectAnswer}>{questions[qNum].incorrect_answers[2]}</button>
+                    <button hidden={hidden2} onClick={ans[0][1]}>{ans[0][0]}</button>
+                    <button hidden={hidden2} onClick={ans[1][1]}>{ans[1][0]}</button>
+                    <button hidden={hidden2} onClick={ans[2][1]}>{ans[2][0]}</button>
+                    <button hidden={hidden2} onClick={ans[3][1]}>{ans[3][0]}</button>
                 </div>
                 <button hidden={hidden} onClick={nextQuestion}>Next Question</button>
             </div>
