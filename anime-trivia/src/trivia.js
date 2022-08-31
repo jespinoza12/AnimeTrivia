@@ -8,7 +8,7 @@ function Trivia({questions}) {
     const [score, setScore] = useState(0)
     const [ans, setAns] = useState([])
     useEffect(()=>{
-        questions();
+        bruhquestions();
     }, []);
 
     
@@ -42,9 +42,9 @@ function Trivia({questions}) {
         setHidden(false)
     }
 
-    const questions = () =>{
+    const bruhquestions = () =>{
 
-        answers = [
+        const answers = [
             [questions[qNum].correct_answer, CorrectAnswer]
             [questions[qNum].incorrect_answer, IncorrectAnswer]
             [questions[qNum].incorrect_answer, IncorrectAnswer]
