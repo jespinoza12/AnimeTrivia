@@ -114,9 +114,8 @@ function Trivia({questions}) {
                             </>
                         ))
                     }
-                    
+                    <button hidden={hidden} onClick={nextQuestion}>Next Question</button>
                 </div>
-                <button hidden={hidden} onClick={nextQuestion}>Next Question</button>
             </div>
             </>
         )
@@ -130,8 +129,8 @@ function Trivia({questions}) {
                     <h1>{questions[qNum].question}</h1>      
                     <button hidden={hidden2} onClick={CorrectAnswer}>{questions.correct_answer}</button>
                     <button hidden={hidden2} onClick={IncorrectAnswer}>{questions.incorrect_answers[0]}</button>
+                    <button hidden={hidden} onClick={nextQuestion}>Next Question</button>
                 </div>
-                <button hidden={hidden} onClick={nextQuestion}>Next Question</button>
             </div>
             </>
         )
